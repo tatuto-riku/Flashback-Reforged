@@ -1,0 +1,227 @@
+package com.moulberry.flashback.editor.ui.windows;
+
+import com.moulberry.flashback.Flashback;
+import com.moulberry.flashback.configuration.FlashbackConfigV1;
+import com.moulberry.flashback.editor.ui.ImGuiHelper;
+import com.moulberry.flashback.editor.ui.ReplayUI;
+import com.moulberry.flashback.state.EditorState;
+import com.moulberry.flashback.state.EditorStateManager;
+import imgui.moulberry90.ImGui;
+import imgui.moulberry90.ImGuiListClipper;
+import imgui.moulberry90.ImGuiViewport;
+import imgui.moulberry90.callback.ImListClipperCallback;
+import imgui.moulberry90.flag.ImGuiCond;
+import imgui.moulberry90.flag.ImGuiWindowFlags;
+import imgui.moulberry90.type.ImBoolean;
+import imgui.moulberry90.type.ImString;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+public class RenderFilterWindow {
+
+    private static boolean wasDocked = false;
+
+    private static ImString entitySearch = ImGuiHelper.createResizableImString("");
+    private static String lastEntitySearch = null;
+    private static List<EntityType<?>> searchedEntityTypes = new ArrayList<>();
+
+    private static ImString particleSearch = ImGuiHelper.createResizableImString("");
+    private static String lastParticleSearch = null;
+    private static List<ResourceLocation> searchedParticleTypes = new ArrayList<>();
+
+    public static void render(ImBoolean open, boolean newlyOpened) {
+        if (newlyOpened) {
+            ImGuiViewport viewport = ImGui.getMainViewport();
+            ImGui.setNextWindowPos(viewport.getCenterX(), viewport.getCenterY(), ImGuiCond.Appearing, 0.5f, 0.5f);
+        }
+
+        ImGui.setNextWindowSizeConstraints(250, 50, 5000, 5000);
+        int flags = ImGuiWindowFlags.NoFocusOnAppearing;
+        if (!wasDocked) {
+            flags |= ImGuiWindowFlags.AlwaysAutoResize;
+        }
+        String title = I18n.get("flashback.render_filter");
+        if (ImGui.begin(title + "###Render Filter", open, flags)) {
+            wasDocked = ImGui.isWindowDocked();
+
+            FlashbackConfigV1 config = Flashback.getConfig();
+
+            if (!config.internal.signedRenderFilter) {
+                String name = Minecraft.getInstance().getGameProfile().getName();
+                ImGui.pushTextWrapPos(ReplayUI.scaleUi(300));
+                ImGui.textWrapped(I18n.get("flashback.render_filter_affirmation", name));
+                if (ImGui.checkbox(I18n.get("flashback.render_filter_sign", name), false)) {
+                    config.internal.signedRenderFilter = true;
+                    config.delayedSaveToDefaultFolder();
+                }
+                ImGui.popTextWrapPos();
+                ImGui.end();
+                return;
+            }
+
+            EditorState editorState = EditorStateManager.getCurrent();
+
+            if (editorState == null) {
+                ImGui.end();
+                return;
+            }
+
+            if (ImGui.beginTabBar("##Select")) {
+                if (ImGui.beginTabItem(I18n.get("flashback.entities"))) {
+                    ImGui.inputText(I18n.get("flashback.search"), entitySearch);
+                    String searchString = ImGuiHelper.getString(entitySearch).trim().toLowerCase(Locale.ROOT);
+                    if (!searchString.equals(lastEntitySearch)) {
+                        lastEntitySearch = searchString;
+                        searchedEntityTypes = new ArrayList<>();
+
+                        List<EntityType<?>> contains = new ArrayList<>();
+
+                        for (EntityType<?> entityType : BuiltInRegistries.ENTITY_TYPE) {
+                            String name = I18n.get(entityType.getDescriptionId()).trim().toLowerCase(Locale.ROOT);
+                            if (name.startsWith(lastEntitySearch)) {
+                                searchedEntityTypes.add(entityType);
+                            } else if (name.contains(lastEntitySearch)) {
+                                contains.add(entityType);
+                            }
+                        }
+
+                        searchedEntityTypes.addAll(contains);
+                    }
+
+                    if (searchedEntityTypes.isEmpty()) {
+                        ImGui.textUnformatted(I18n.get("flashback.no_entities_found"));
+                    } else {
+                        if (ImGui.beginChild("##Scroller", 0, 300)) {
+                            ImGuiListClipper.forEach(searchedEntityTypes.size(), new ImListClipperCallback() {
+                                @Override
+                                public void accept(int i) {
+                                    EntityType<?> entityType = searchedEntityTypes.get(i);
+                                    ResourceLocation resourceLocation = BuiltInRegistries.ENTITY_TYPE.getKey(entityType);
+
+                                    boolean filtered = editorState.filteredEntities.contains(resourceLocation.toString());
+
+                                    String name = I18n.get(entityType.getDescriptionId());
+                                    if (ImGui.checkbox(name + "###" + resourceLocation, !filtered)) {
+                                        if (filtered) {
+                                            editorState.filteredEntities.remove(resourceLocation.toString());
+                                        } else {
+                                            editorState.filteredEntities.add(resourceLocation.toString());
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                        ImGui.endChild();
+
+                        if (ImGui.smallButton(I18n.get("flashback.enable_all"))) {
+                            editorState.filteredEntities.clear();
+                        }
+                        ImGui.sameLine();
+                        if (ImGui.smallButton(I18n.get("flashback.disable_all"))) {
+                            for (EntityType<?> entityType : BuiltInRegistries.ENTITY_TYPE) {
+                                ResourceLocation resourceLocation = BuiltInRegistries.ENTITY_TYPE.getKey(entityType);
+                                editorState.filteredEntities.add(resourceLocation.toString());
+                            }
+                        }
+                    }
+
+                    ImGui.endTabItem();
+                }
+                if (ImGui.beginTabItem(I18n.get("flashback.particles"))) {
+                    ImGui.inputText(I18n.get("flashback.search"), particleSearch);
+                    String searchString = ImGuiHelper.getString(particleSearch).trim().toLowerCase(Locale.ROOT);
+                    if (!searchString.equals(lastParticleSearch)) {
+                        lastParticleSearch = searchString;
+                        searchedParticleTypes = new ArrayList<>();
+
+                        List<ResourceLocation> contains = new ArrayList<>();
+
+                        for (ParticleType<?> particleType : BuiltInRegistries.PARTICLE_TYPE) {
+                            ResourceLocation resourceLocation = BuiltInRegistries.PARTICLE_TYPE.getKey(particleType);
+                            if (resourceLocation == null) {
+                                continue;
+                            }
+
+                            String name;
+                            if (resourceLocation.getNamespace().equals("minecraft")) {
+                                name = resourceLocation.getPath().toLowerCase(Locale.ROOT);
+                            } else {
+                                name = resourceLocation.toString().toLowerCase(Locale.ROOT);
+                            }
+
+                            if (name.startsWith(lastParticleSearch)) {
+                                searchedParticleTypes.add(resourceLocation);
+                            } else if (name.contains(lastParticleSearch)) {
+                                contains.add(resourceLocation);
+                            }
+                        }
+
+                        searchedParticleTypes.addAll(contains);
+                    }
+
+                    if (searchedParticleTypes.isEmpty()) {
+                        ImGui.textUnformatted(I18n.get("flashback.no_particles_found"));
+                    } else {
+                        if (ImGui.beginChild("##Scroller", 0, 300)) {
+                            ImGuiListClipper.forEach(searchedParticleTypes.size(), new ImListClipperCallback() {
+                                @Override
+                                public void accept(int i) {
+                                    ResourceLocation particleType = searchedParticleTypes.get(i);
+
+                                    boolean filtered = editorState.filteredParticles.contains(particleType.toString());
+
+                                    String name;
+                                    if (particleType.getNamespace().equals("minecraft")) {
+                                        name = particleType.getPath().toLowerCase(Locale.ROOT);
+                                    } else {
+                                        name = particleType.toString().toLowerCase(Locale.ROOT);
+                                    }
+
+                                    if (ImGui.checkbox(name, !filtered)) {
+                                        if (filtered) {
+                                            editorState.filteredParticles.remove(particleType.toString());
+                                        } else {
+                                            editorState.filteredParticles.add(particleType.toString());
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                        ImGui.endChild();
+
+                        if (ImGui.smallButton(I18n.get("flashback.enable_all"))) {
+                            editorState.filteredParticles.clear();
+                        }
+                        ImGui.sameLine();
+                        if (ImGui.smallButton(I18n.get("flashback.disable_all"))) {
+                            for (ParticleType<?> particleType : BuiltInRegistries.PARTICLE_TYPE) {
+                                ResourceLocation resourceLocation = BuiltInRegistries.PARTICLE_TYPE.getKey(particleType);
+                                if (resourceLocation == null) {
+                                    continue;
+                                }
+                                editorState.filteredParticles.add(resourceLocation.toString());
+                            }
+                        }
+                    }
+
+                    ImGui.pushTextWrapPos(ReplayUI.scaleUi(300));
+                    ImGui.textWrapped(I18n.get("flashback.particles_note"));
+                    ImGui.popTextWrapPos();
+
+                    ImGui.endTabItem();
+                }
+                ImGui.endTabBar();
+            }
+        }
+        ImGui.end();
+    }
+
+}

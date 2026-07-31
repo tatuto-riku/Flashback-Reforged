@@ -1,0 +1,133 @@
+{
+  "mappings": {
+    "net/minecraft/client/Minecraft": {
+      "isLocalPlayer": "b"
+    },
+    "net/minecraft/world/level/lighting/LevelLightEngine": {
+      "runLightUpdates": "a"
+    },
+    "net/minecraft/client/sounds/SoundManager": {
+      "updateSource": "a",
+      "play": "a"
+    },
+    "com/mojang/blaze3d/pipeline/RenderTarget": {
+      "blitToScreen": "a"
+    },
+    "com/mojang/blaze3d/platform/Window": {
+      "setErrorSection": "a"
+    },
+    "net/minecraft/server/MinecraftServer": {
+      "spin": "a"
+    },
+    "net/minecraft/world/TickRateManager": {
+      "runsNormally": "i"
+    },
+    "net/minecraft/client/renderer/LevelRenderer": {
+      "renderSectionLayer": "a",
+      "renderEntity": "a",
+      "renderSky": "a",
+      "setupRender": "a"
+    },
+    "net/minecraft/client/renderer/FogRenderer": {
+      "levelFogColor": "b"
+    },
+    "net/minecraft/client/renderer/blockentity/BlockEntityRenderDispatcher": {
+      "render": "a"
+    },
+    "net/minecraft/world/level/biome/Biome": {
+      "hasPrecipitation": "c",
+      "getPrecipitationAt": "a"
+    },
+    "net/minecraft/client/Options": {
+      "getCloudsType": "az",
+      "sensitivity": "d"
+    },
+    "net/minecraft/client/particle/ParticleEngine": {
+      "render": "a"
+    },
+    "net/minecraft/client/gui/layouts/GridLayout": {
+      "arrangeElements": "a"
+    },
+    "net/minecraft/client/gui/layouts/FrameLayout": {
+      "alignInRectangle": "a"
+    },
+    "net/minecraft/Util": {
+      "getMillis": "c"
+    },
+    "net/minecraft/client/renderer/GameRenderer": {
+      "getMainCamera": "l"
+    },
+    "net/minecraft/client/multiplayer/MultiPlayerGameMode": {
+      "getPlayerMode": "j",
+      "canHurtPlayer": "a"
+    },
+    "net/minecraft/client/renderer/ItemInHandRenderer": {
+      "renderHandsWithItems": "a"
+    },
+    "net/minecraft/world/level/Level": {
+      "playLocalSound": "a"
+    },
+    "com/mojang/blaze3d/audio/Library": {
+      "openDeviceOrFallback": "a",
+      "cleanup": "d"
+    },
+    "net/minecraft/client/Camera": {
+      "setPosition": "a",
+      "setup": "a",
+      "rotation": "f"
+    },
+    "net/minecraft/world/level/saveddata/maps/MapItemSavedData": {
+      "mapMatcher": "a"
+    },
+    "net/minecraft/client/renderer/entity/EntityRenderDispatcher": {
+      "getRenderer": "a",
+      "renderShadow": "a"
+    },
+    "net/minecraft/client/renderer/entity/player/PlayerRenderer": {
+      "renderLeftHand": "b",
+      "renderRightHand": "a"
+    },
+    "com/mojang/blaze3d/systems/RenderSystem": {
+      "clear": "clear"
+    },
+    "net/minecraft/core/HolderSet": {
+      "canSerializeIn": "a"
+    },
+    "net/minecraft/core/Holder": {
+      "canSerializeIn": "a"
+    },
+    "net/minecraft/server/network/ServerLoginPacketListenerImpl": {
+      "disconnect": "a"
+    },
+    "net/minecraft/server/level/ServerChunkCache": {
+      "getGeneratorState": "h"
+    },
+    "net/minecraft/world/level/chunk/ChunkGeneratorStructureState": {
+      "ensureStructuresGenerated": "b"
+    },
+    "net/minecraft/server/level/ServerEntity": {
+      "sendPairingData": "a"
+    },
+    "net/minecraft/world/scores/Scoreboard": {
+      "getDisplayObjective": "a"
+    },
+    "net/minecraft/world/scores/PlayerTeam": {
+      "formatNameForTeam": "a"
+    },
+    "com/mojang/blaze3d/vertex/PoseStack": {
+      "popPose": "b"
+    },
+    "net/minecraft/world/level/block/Block": {
+      "animateTick": "a"
+    },
+    "net/minecraft/world/level/material/FluidState": {
+      "animateTick": "a"
+    },
+    "net/minecraft/util/RandomSource": {
+      "create": "a"
+    },
+    "net/minecraft/client/particle/Particle": {
+      "setSize": "b"
+    }
+  }
+}
