@@ -1,59 +1,88 @@
-<h1 align="center">Flashback Reforged</h1>
+<div align="center">
+  <img src="Logo.png" width="128" alt="Flashback Reforged Logo">
 
-Relive, Record, and Replay Your Minecraft Journeys.
+  <h1>Flashback Reforged</h1>
 
-Flashback is now available for NeoForge!
+  <p>
+    A NeoForge port of Flashback, bringing replay recording and cinematic tools
+    to modern Minecraft modpacks.
+  </p>
+</div>
 
-Originally designed to bring powerful replay and recording capabilities to Minecraft, this unofficial port brings the full Flashback experience natively to modern NeoForge setups—giving you smooth performance and seamless integration with your favorite modded environments.
+---
+
+Flashback Reforged is an unofficial NeoForge port of the original Flashback mod.
+
+It brings replay recording, camera tools, and cinematic recording features to NeoForge, while adding compatibility improvements for heavily modded environments.
 
 ![Using Flashback Reforged](https://cdn.modrinth.com/data/cached_images/49c100f22836d272279927816520ff43f23b1928.png)
 
-## 🌟 Key Features
+## ✨ Features
 
-Seamless Recording: Record your gameplay in real time with minimal FPS impact.
+- **Replay Recording**  
+  Record your Minecraft sessions and revisit them later.
 
-High-Precision Replay: Capture cinematic camera movements, player actions, and world events with ease.
+- **Cinematic Tools**  
+  Create smooth camera movements, showcase builds, and capture events from different angles.
 
-Create Mod Compatibility: Full support for Create! Trains, rotating contraptions, gears, and kinetic machinery now record and render accurately during replays without graphical glitches or desyncs.
+- **Create Mod Support**  
+  Flashback Reforged includes fixes for recording and rendering Create contraptions, including:
+  - Moving trains
+  - Rotating machinery
+  - Large kinetic builds
+  - Automated factories
 
-## ⚙️ Create Mod Compatibility
+## ⚙️ Create Compatibility
 
-Capturing dynamic modded entities can often be tricky, but Flashback for NeoForge correctly handles:
+Modded Minecraft can be difficult for replay mods because many blocks and entities are constantly changing.
 
-Moving contraptions and assembly lines
+Flashback Reforged improves compatibility with Create-based setups, allowing complex contraptions and moving machines to appear correctly during replays.
 
-Trains and track networks
+For Create Aeronautics users, install [Aeronautics Flashback](https://modrinth.com/mod/aeronautics-flashback) for additional compatibility.
 
-Complex kinetic structures and rotation states
+## 📦 Installation
 
-Now you can capture your massive automated factories and cinematic train rides in full glory!
+1. Download Flashback Reforged.
+2. Place the `.jar` file into your Minecraft `mods` folder.
+3. Launch the game and start recording.
 
-**It is compatible with various other mods!**
+### Optional
 
-## ‼️ Incompatible mod
+Install Create if you want Create-specific replay improvements.
 
-**ReForgedPlay**
+### Iris Shader Users
 
-**ServerCore**
+If you use Iris shaders, downgrade Sodium to **0.6.13** for compatibility.
 
-## 🛠️ Installation
+### Export Tips
 
-(Optional) Install Create if you want to use the enhanced Create mod compatibility.
+Use the **"No GUI"** option if you don't want the recording interface visible during exports.
 
-**Note for Create Aeronautics Users: To ensure full compatibility and seamless integration with Create Aeronautics, please make sure to install the [Aeronautics Flashback](https://modrinth.com/mod/aeronautics-flashback) Mod.**
+## ❌ Known Incompatible Mods
 
-Note for Iris Shader users: If you are using Iris shaders, please downgrade Sodium to version 0.6.13 to ensure full compatibility.
+Currently incompatible with:
 
-Drop the mod file into your mods folder.
+- ReForgedPlay
+- ServerCore
+- C2ME
+- Cosmonautics
+- Cosmonautics Deep Air
+- Create: Power Loader
+- ModernFix
+- Ragdoll Corpse
+- Ragdoll Reactions
+- Sable Player Ragdoll
+- Superb Warfare
+- Iris Shaders
 
-Launch the game and start recording!
+## 🛠️ Development Status
 
-**Tips**: Select "no gui" if you do not want to display the GUI during export.
+Flashback Reforged is still actively being developed. Some features may not work perfectly yet, and bugs are expected.
 
-## 📄 Credits & Disclaimer
+If you find an issue, please report it here instead of reporting it to the original Flashback project.
 
-All original credit for the concept and design goes to the original Flashback development team.
+## 📜 Credits
 
-Please report any bugs or issues specific to this port on our page (not on the original mod's page).
+Flashback Reforged is based on the original Flashback project.
 
-### As this mod is still under development, it may not function correctly.
+All credit for the original concept and design goes to the Flashback development team.
