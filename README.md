@@ -1,7 +1,12 @@
 <h1 align="center">Flashback Reforged</h1>
 
-Relive, Record, and Replay Your Minecraft Journeys.
+# Development of this mod has ended due to licensing issues.
+# Please use the following mods that offer the same functionality:
+# [Create: Flashback](https://github.com/tatuto-riku/create_flashback)
+# [Create: Aeronautics Flashback](https://github.com/tatuto-riku/create_aeronautics_flashback)
 
+
+Relive, Record, and Replay Your Minecraft Journeys.
 Flashback is now available for NeoForge!
 
 Originally designed to bring powerful replay and recording capabilities to Minecraft, this unofficial port brings the full Flashback experience natively to modern NeoForge setups—giving you smooth performance and seamless integration with your favorite modded environments.
