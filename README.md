@@ -1,8 +1,8 @@
 <h1 align="center">Flashback Reforged</h1>
 
-**Development of this mod has ended due to licensing issues.**
+# Development of this mod has ended due to licensing issues.
 
-**Please use the following mods that offer the same functionality:**
+## Please use the following mods that offer the same functionality:
 
 **[Create: Flashback](https://github.com/tatuto-riku/create_flashback)**
 
