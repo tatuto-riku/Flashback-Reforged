@@ -9,6 +9,18 @@
   </p>
 </div>
 
+# Development of this mod has ended due to licensing issues.
+
+## Please use the following mods that offer the same functionality:
+
+**[Create: Flashback](https://github.com/tatuto-riku/create_flashback)**
+
+**[Create: Aeronautics Flashback](https://github.com/tatuto-riku/create_aeronautics_flashback)**
+
+
+Relive, Record, and Replay Your Minecraft Journeys.
+Flashback is now available for NeoForge!
+
 ---
 
 Flashback Reforged is an unofficial NeoForge port of the original Flashback mod.
@@ -86,3 +98,4 @@ If you find an issue, please report it here instead of reporting it to the origi
 Flashback Reforged is based on the original Flashback project.
 
 All credit for the original concept and design goes to the Flashback development team.
+### As this mod is still under development, it may not function correctly.
