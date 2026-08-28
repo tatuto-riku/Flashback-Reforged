@@ -2,11 +2,7 @@
 
 # Development of this mod has ended due to licensing issues.
 
-## Please use the following mods that offer the same functionality:
-
-**[Create: Flashback](https://github.com/tatuto-riku/create_flashback)**
-
-**[Create: Aeronautics Flashback](https://github.com/tatuto-riku/create_aeronautics_flashback)**
+# Recommend using [Flashback Neoforge Fixed](https://github.com/tatuto-riku/flashback-neoforge-fixed).
 
 ## I will also consider the handling of this issue concluded.
 
